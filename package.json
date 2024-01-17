@@ -2,19 +2,12 @@
   "name": "link-analyzer",
   "version": "1.0.0",
   "description": "JavaScript application that generates an \"internal links\" report for any website on the internet by crawling each page of the site.",
-  "main": "index.js",
   "scripts": {
-    "start": "node main.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node main.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/OferRavid/link-analyzer.git"
   },
-  "author": "OferRavid",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/OferRavid/link-analyzer/issues"
-  },
-  "homepage": "https://github.com/OferRavid/link-analyzer#readme"
+  "author": "OferRavid"
 }
