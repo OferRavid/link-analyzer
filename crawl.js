@@ -10,9 +10,9 @@ function normalizeURL(url) {
 }
 
 function getURLsFromHTML(htmlBody, baseURL) {
-    htmlObj = new JSDOM(htmlBody)
-    listURLs = htmlObj.window.document.querySelectorAll('a')
-    listAbsoluteURLs = []
+    const htmlObj = new JSDOM(htmlBody)
+    const listURLs = htmlObj.window.document.querySelectorAll('a')
+    const listAbsoluteURLs = []
     for (const relativeURL of listURLs) {
         try {
             const urlObj = new URL(relativeURL.href, baseURL)

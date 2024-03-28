@@ -48,15 +48,18 @@ test('relative URLs', () => {
 });
 
 test('find all', () => {
-    const htmlBody = `<html>
-                          <body>
-                              <a href="https://boot.dev/a"></a>
-                              <a href="https://boot.dev/b"></a>
-                              <a href="https://boot.dev/c"></a>
-                              <a href="/d"></a>
-                              <a href="https://example.com/test"></a>
-                          </body>
-                    </html>`
+    const htmlBody =
+    `
+    <html>
+        <body>
+            <a href="https://boot.dev/a"></a>
+            <a href="https://boot.dev/b"></a>
+            <a href="https://boot.dev/c"></a>
+            <a href="/d"></a>
+            <a href="https://example.com/test"></a>
+        </body>
+    </html>
+    `
     const baseURL = 'https://boot.dev'
     const actual = getURLsFromHTML(htmlBody, baseURL)
     const expected = ['https://boot.dev/a', 'https://boot.dev/b', 'https://boot.dev/c', 'https://boot.dev/d', 'https://example.com/test']
