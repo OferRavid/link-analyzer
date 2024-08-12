@@ -1,4 +1,5 @@
-const { argv } = require('node:process');
+import { argv } from 'node:process';
+import { crawlPage } from './crawl.js';
 
 function main(){
     if (argv.length < 3) {
@@ -11,6 +12,7 @@ function main(){
     }
     const baseURL = argv.slice(-1)
     console.log(`Web crawler is starting on ${baseURL} ...`)
+    crawlPage(baseURL)
 }
 
 main()
