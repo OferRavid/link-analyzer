@@ -1,53 +1,56 @@
-const { test, expect } = require('@jest/globals')
+const { test, expect } = require('@jest/globals');
+const { normalizeURL, getURLsFromHTML } = require('./crawl.js');
 
-const { normalizeURL } = require('./crawl.js')
-
-const { getURLsFromHTML } = require('./crawl.js')
-
+/**
+ * Tests the normalizeURL function to ensure it correctly formats URLs.
+ */
 test('normalized url for https://blog.boot.dev/path/', () => {
-    const input = 'https://blog.boot.dev/path/'
-    const actual = normalizeURL(input)
-    const expected = 'blog.boot.dev/path'
+    const input = 'https://blog.boot.dev/path/';
+    const actual = normalizeURL(input);
+    const expected = 'blog.boot.dev/path';
     expect(actual).toBe(expected);
 });
 
 test('normalized url for http://blog.boot.dev/path/', () => {
-    const input = 'http://blog.boot.dev/path/'
-    const actual = normalizeURL(input)
-    const expected = 'blog.boot.dev/path'
+    const input = 'http://blog.boot.dev/path/';
+    const actual = normalizeURL(input);
+    const expected = 'blog.boot.dev/path';
     expect(actual).toBe(expected);
 });
 
 test('normalized url for https://blog.boot.dev/path', () => {
-    const input = 'https://blog.boot.dev/path'
-    const actual = normalizeURL(input)
-    const expected = 'blog.boot.dev/path'
+    const input = 'https://blog.boot.dev/path';
+    const actual = normalizeURL(input);
+    const expected = 'blog.boot.dev/path';
     expect(actual).toBe(expected);
 });
 
 test('normalized url for http://blog.boot.dev/path', () => {
-    const input = 'http://blog.boot.dev/path'
-    const actual = normalizeURL(input)
-    const expected = 'blog.boot.dev/path'
+    const input = 'http://blog.boot.dev/path';
+    const actual = normalizeURL(input);
+    const expected = 'blog.boot.dev/path';
     expect(actual).toBe(expected);
 });
 
 test('normalized url for https://BLOG.boot.dev/path', () => {
-    const input = 'https://BLOG.boot.dev/path'
-    const actual = normalizeURL(input)
-    const expected = 'blog.boot.dev/path'
+    const input = 'https://BLOG.boot.dev/path';
+    const actual = normalizeURL(input);
+    const expected = 'blog.boot.dev/path';
     expect(actual).toBe(expected);
 });
 
+/**
+ * Tests the getURLsFromHTML function to ensure it correctly extracts and converts URLs.
+ */
 test('relative URLs', () => {
-    const htmlBody = `<html><body><a href="/a"></a></body></html>`
-    const baseURL = 'https://boot.dev'
-    const actual = getURLsFromHTML(htmlBody, baseURL)
-    const expected = [`${baseURL}/a`]
-    expect(actual).toStrictEqual(expected)
+    const htmlBody = `<html><body><a href="/a"></a></body></html>`;
+    const baseURL = 'https://boot.dev';
+    const actual = getURLsFromHTML(htmlBody, baseURL);
+    const expected = [`${baseURL}/a`];
+    expect(actual).toStrictEqual(expected);
 });
 
-test('find all', () => {
+test('find all links', () => {
     const htmlBody =
     `
     <html>
@@ -59,9 +62,15 @@ test('find all', () => {
             <a href="https://example.com/test"></a>
         </body>
     </html>
-    `
-    const baseURL = 'https://boot.dev'
-    const actual = getURLsFromHTML(htmlBody, baseURL)
-    const expected = ['https://boot.dev/a', 'https://boot.dev/b', 'https://boot.dev/c', 'https://boot.dev/d', 'https://example.com/test']
-    expect(actual).toStrictEqual(expected)
+    `;
+    const baseURL = 'https://boot.dev';
+    const actual = getURLsFromHTML(htmlBody, baseURL);
+    const expected = [
+        'https://boot.dev/a',
+        'https://boot.dev/b',
+        'https://boot.dev/c',
+        'https://boot.dev/d',
+        'https://example.com/test'
+    ];
+    expect(actual).toStrictEqual(expected);
 });
